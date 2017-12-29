@@ -11,12 +11,16 @@ class BooksApp extends Component {
     read: [],
     wantToRead: []
   }
+  shelves = [
+    {id: 'currentlyReading', title: 'Currently Reading'},
+    {id: 'wantToRead', title: 'Want to Read'},
+    {id: 'read', title: 'Read'},
+  ]
 
   placeInShelf = (books) => {
-    // TODO: Make loop
-    this.setState({ currentlyReading: books.filter((book) => book.shelf === 'currentlyReading')})
-    this.setState({ read: books.filter((book) => book.shelf === 'read')})
-    this.setState({ wantToRead: books.filter((book) => book.shelf === 'wantToRead')})
+    for (const shelf of this.shelves) {
+      this.setState({ [shelf.id]: books.filter((book) => book.shelf === shelf.id)})
+    }
   }
 
   componentDidMount() {
