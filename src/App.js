@@ -6,10 +6,14 @@ import ListBooks from './ListBooks'
 
 class BooksApp extends Component {
   state = {
-    books: [
-      {title: 'To Kill a Mockingbird', authors: 'Harper Lee', imgURL: 'http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api'},
-      {title: 'Enders Game', authors: 'Orson Scott Card', imgURL: 'http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api'}
-    ]
+    books: []
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then( (books) => {
+      this.setState({ books })
+      console.log(this.state.books)
+    })
   }
 
   render() {
