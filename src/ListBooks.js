@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 class ListBooks extends Component {
   render() {
-    const { books } = this.props
+    const { currentlyReading, wantToRead, read } = this.props
 
     return(
       <div className="list-books">
@@ -13,9 +13,9 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <BookShelf books={books} sectionTitle="Currently Reading" />
-            <BookShelf books={books} sectionTitle="Want to Read" />
-            <BookShelf books={books} sectionTitle="Read" />
+            <BookShelf books={currentlyReading} sectionTitle="Currently Reading" />
+            <BookShelf books={wantToRead} sectionTitle="Want to Read" />
+            <BookShelf books={read} sectionTitle="Read" />
           </div>
         </div>
         <div className="open-search">

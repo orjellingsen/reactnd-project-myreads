@@ -31,7 +31,9 @@ class BooksApp extends Component {
       <div className="app">
         <Route exact path='/' render={() => (
           <ListBooks
-            books={this.state.books}
+            read={this.state.read}
+            currentlyReading={this.state.currentlyReading}
+            wantToRead={this.state.wantToRead}
           />
         )}/>
         <Route path='/search' render={() => (
