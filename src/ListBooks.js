@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 class ListBooks extends Component {
   render() {
+    const { books } = this.props
+
     return(
       <div className="list-books">
         <div className="list-books-title">
@@ -11,9 +13,9 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <BookShelf title="Currently Reading" />
-            <BookShelf title="Want to Read" />
-            <BookShelf title="Read" />
+            <BookShelf books={books} sectionTitle="Currently Reading" />
+            <BookShelf books={books} sectionTitle="Want to Read" />
+            <BookShelf books={books} sectionTitle="Read" />
           </div>
         </div>
         <div className="open-search">
