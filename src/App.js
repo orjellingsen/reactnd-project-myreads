@@ -9,16 +9,16 @@ class BooksApp extends Component {
     books: [],
     currentlyReading: [],
     read: [],
-    wantToRead: []
+    wantToRead: [],
+    shelves: [
+      {id: 'currentlyReading', title: 'Currently Reading'},
+      {id: 'wantToRead', title: 'Want to Read'},
+      {id: 'read', title: 'Read'}
+    ]
   }
-  shelves = [
-    {id: 'currentlyReading', title: 'Currently Reading'},
-    {id: 'wantToRead', title: 'Want to Read'},
-    {id: 'read', title: 'Read'},
-  ]
 
   placeInShelf = (books) => {
-    for (const shelf of this.shelves) {
+    for (const shelf of this.state.shelves) {
       this.setState({ [shelf.id]: books.filter((book) => book.shelf === shelf.id)})
     }
   }
