@@ -6,13 +6,23 @@ import ListBooks from './ListBooks'
 
 class BooksApp extends Component {
   state = {
-    books: []
+    books: [],
+    currentlyReading: [],
+    read: [],
+    wantToRead: []
+  }
+
+  placeInShelf = (books) => {
+    // TODO: Make loop
+    this.setState({ currentlyReading: books.filter((book) => book.shelf === 'currentlyReading')})
+    this.setState({ read: books.filter((book) => book.shelf === 'read')})
+    this.setState({ wantToRead: books.filter((book) => book.shelf === 'wantToRead')})
   }
 
   componentDidMount() {
     BooksAPI.getAll().then( (books) => {
       this.setState({ books })
-      console.log(this.state.books)
+      this.placeInShelf(books)
     })
   }
 
