@@ -6,27 +6,18 @@ import ListBooks from './ListBooks'
 
 class BooksApp extends Component {
   state = {
-    books: [],
-    currentlyReading: [],
-    read: [],
-    wantToRead: [],
-    shelves: [
-      {id: 'currentlyReading', title: 'Currently Reading'},
-      {id: 'wantToRead', title: 'Want to Read'},
-      {id: 'read', title: 'Read'}
-    ]
+    books: []
   }
 
-  placeInShelf = (books) => {
-    for (const shelf of this.state.shelves) {
-      this.setState({ [shelf.id]: books.filter((book) => book.shelf === shelf.id)})
-    }
-  }
+  shelves = [
+    {id: 'currentlyReading', title: 'Currently Reading'},
+    {id: 'wantToRead', title: 'Want to Read'},
+    {id: 'read', title: 'Read'}
+  ]
 
-  componentDidMount() {
+ componentDidMount() {
     BooksAPI.getAll().then( (books) => {
       this.setState({ books })
-      this.placeInShelf(books)
     })
   }
 
@@ -35,9 +26,8 @@ class BooksApp extends Component {
       <div className="app">
         <Route exact path='/' render={() => (
           <ListBooks
-            read={this.state.read}
-            currentlyReading={this.state.currentlyReading}
-            wantToRead={this.state.wantToRead}
+            books={this.state.books}
+            shelves={this.shelves}
           />
         )}/>
         <Route path='/search' render={() => (
