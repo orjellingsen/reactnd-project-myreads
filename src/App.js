@@ -26,6 +26,7 @@ class BooksApp extends Component {
     let books = this.state.books;
     books[index] = book;
     this.setState({ books });
+    BooksAPI.update(book, book.shelf)
   }
   filteredBooks(shelf) {
     return this.state.books.filter((book) => book.shelf === shelf);
