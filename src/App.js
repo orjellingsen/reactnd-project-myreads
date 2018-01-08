@@ -9,10 +9,6 @@ class BooksApp extends Component {
     books: []
   }
 
- /* updateShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf).then(this.setState({shelf}))
-  }*/
-
  componentDidMount() {
     BooksAPI.getAll().then( (books) => {
       this.setState({ books })
@@ -20,14 +16,15 @@ class BooksApp extends Component {
   }
 
   updateShelf(id, value) {
-    const index = this.state.books.findIndex((book) => book.id === id);
-    let book = this.state.books[index];
-    book.shelf = value;
-    let books = this.state.books;
-    books[index] = book;
-    this.setState({ books });
+    const index = this.state.books.findIndex((book) => book.id === id)
+    let book = this.state.books[index]
+    book.shelf = value
+    let books = this.state.books
+    books[index] = book
+    this.setState({ books })
     BooksAPI.update(book, book.shelf)
   }
+
   filteredBooks(shelf) {
     return this.state.books.filter((book) => book.shelf === shelf);
   }

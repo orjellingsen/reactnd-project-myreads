@@ -3,10 +3,14 @@ import BookShelf from './BookShelf'
 import { Link } from 'react-router-dom'
 
 class ListBooks extends Component {
-
+  shelves = [
+    {id: 'currentlyReading', title: 'Currently Reading'},
+    {id: 'wantToRead', title: 'Want to Read'},
+    {id: 'read', title: 'Read'}
+  ]
 
   render() {
-    const { filteredBooks } = this.props
+    const { filteredBooks, updateShelf } = this.props
 
     return(
       <div className="list-books">
@@ -15,21 +19,14 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
+            {this.shelves.map( (shelf) => (
               <BookShelf
-                filteredBooks={filteredBooks('currentlyReading')}
-                sectionTitle='Currently Reading'
-                updateShelf={this.props.updateShelf}
+                key={shelf.id}
+                filteredBooks={filteredBooks(shelf.id)}
+                sectionTitle={shelf.title}
+                updateShelf={updateShelf}
               />
-              <BookShelf
-                filteredBooks={filteredBooks('wantToRead')}
-                sectionTitle='Want to Read'
-                updateShelf={this.props.updateShelf}
-              />
-              <BookShelf
-                filteredBooks={filteredBooks('read')}
-                sectionTitle='Read'
-                updateShelf={this.props.updateShelf}
-              />
+            ))}
           </div>
         </div>
         <div className="open-search">
