@@ -8,7 +8,6 @@ class Book extends Component {
 
   render() {
     const { book } = this.props
-    if(!book.shelf) book.shelf = 'none'
 
     return(
       <li>
@@ -16,7 +15,7 @@ class Book extends Component {
         <div className="book-top">
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks.thumbnail ? book.imageLinks.thumbnail : ''}")` }}></div>
           <div className="book-shelf-changer">
-            <select value={book.shelf} onChange={this.handleChange.bind(this)}>
+            <select value={book.shelf ? book.shelf : 'none'} onChange={this.handleChange.bind(this)}>
               <option value="" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
@@ -25,7 +24,7 @@ class Book extends Component {
             </select>
           </div>
         </div>
-        <div className="book-title">{book.title}</div>
+        <div className="book-title">{book.title ? book.title : 'No title'}</div>
         <div className="book-authors">{book.authors ? book.authors : ''}</div>
       </div>
       </li>
