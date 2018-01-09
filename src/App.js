@@ -6,7 +6,8 @@ import ListBooks from './ListBooks'
 
 class BooksApp extends Component {
   state = {
-    books: []
+    books: [],
+    foundBooks: []
   }
 
  componentDidMount() {
@@ -29,6 +30,14 @@ class BooksApp extends Component {
     return this.state.books.filter((book) => book.shelf === shelf);
   }
 
+  searchBooks = (query) => {
+    BooksAPI.search(query).then((books) => {
+      books.error ?
+        this.setState({ foundBooks : [] }) :
+        this.setState({ foundBooks : books })
+    })
+  }
+
   render() {
     return (
       <div className="app">
@@ -40,7 +49,11 @@ class BooksApp extends Component {
           />
         )}/>
         <Route path='/search' render={() => (
-          <SearchPage />
+          <SearchPage
+            searchBooks={this.searchBooks.bind(this)}
+            foundBooks={this.state.foundBooks}
+            updateShelf={this.updateShelf.bind(this)}
+          />
         )}/>
       </div>
     )
