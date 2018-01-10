@@ -4,13 +4,11 @@ import Book from './Book'
 
 class SearchPage extends Component {
   state = {
-    query: '',
-    prevQuery: ''
+    query: ''
   }
 
   updateQuery = (query) => {
-    const { prevQuery } = this.state
-    if (prevQuery !== query) {
+    if(query) {
       this.props.searchBooks(query)
       this.setState({ query })
     }
