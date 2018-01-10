@@ -32,9 +32,11 @@ class BooksApp extends Component {
 
   searchBooks = (query) => {
     BooksAPI.search(query).then((books) => {
-      books.error ?
-        this.setState({ foundBooks : [] }) :
-        this.setState({ foundBooks : books })
+      if(books) {
+        !books.error ?
+          this.setState({ foundBooks : books }) :
+          this.setState({ foundBooks : [] })
+      }
     })
   }
 

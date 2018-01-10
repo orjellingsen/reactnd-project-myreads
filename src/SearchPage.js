@@ -8,10 +8,8 @@ class SearchPage extends Component {
   }
 
   updateQuery = (query) => {
-    if(query) {
       this.props.searchBooks(query)
-      this.setState({ query })
-    }
+      this.setState({ query: query })
   }
 
   render() {
@@ -24,6 +22,7 @@ class SearchPage extends Component {
           <div className="search-books-input-wrapper">
             <input autoFocus
               type="text"
+              value={this.state.query}
               onChange={(event) => this.updateQuery(event.target.value)}
               placeholder="Search by title or author"
             />
