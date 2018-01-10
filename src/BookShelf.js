@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Book from './Book.js'
 
 class BookShelf extends Component {
+  static propTypes = {
+    sectionTitle: PropTypes.string,
+    filteredBooks: PropTypes.array.isRequired,
+    updateShelf: PropTypes.func.isRequired
+  }
+
   render() {
-    const { sectionTitle, filteredBooks} = this.props
+    const { sectionTitle, filteredBooks, updateShelf} = this.props
 
     return(
       <div className="bookshelf">
@@ -15,7 +22,7 @@ class BookShelf extends Component {
                 key={book.id}
                 id={book.id}
                 book={book}
-                updateShelf={this.props.updateShelf}
+                updateShelf={updateShelf}
               />
             ))}
           </ol>

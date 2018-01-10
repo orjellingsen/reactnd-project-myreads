@@ -26,7 +26,7 @@ class BooksApp extends Component {
     })
   }
 
-  filteredBooks = (shelf) => {
+  filterBooks = (shelf) => {
     return this.state.books.filter((book) => book.shelf === shelf);
   }
 
@@ -44,8 +44,7 @@ class BooksApp extends Component {
         <Route exact path='/' render={() => (
           <ListBooks
             updateShelf={this.updateShelf.bind(this)}
-            filteredBooks={this.filteredBooks.bind(this)}
-            books={this.state.books}
+            filterBooks={this.filterBooks.bind(this)}
           />
         )}/>
         <Route path='/search' render={() => (

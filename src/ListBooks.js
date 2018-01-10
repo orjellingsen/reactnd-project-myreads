@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import BookShelf from './BookShelf'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 class ListBooks extends Component {
+  static propTypes = {
+    updateShelf: PropTypes.func.isRequired,
+    filterBooks: PropTypes.func.isRequired
+  }
+
   shelves = [
     {id: 'currentlyReading', title: 'Currently Reading'},
     {id: 'wantToRead', title: 'Want to Read'},
@@ -10,7 +16,7 @@ class ListBooks extends Component {
   ]
 
   render() {
-    const { filteredBooks, updateShelf } = this.props
+    const { filterBooks, updateShelf } = this.props
 
     return(
       <div className="list-books">
@@ -22,7 +28,7 @@ class ListBooks extends Component {
             {this.shelves.map( (shelf) => (
               <BookShelf
                 key={shelf.id}
-                filteredBooks={filteredBooks(shelf.id)}
+                filteredBooks={filterBooks(shelf.id)}
                 sectionTitle={shelf.title}
                 updateShelf={updateShelf}
               />
