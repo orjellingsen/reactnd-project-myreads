@@ -1,15 +1,23 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Book from './Book'
 
 class SearchPage extends Component {
+  static propTypes = {
+    searchBooks: PropTypes.func.isRequired,
+    updateShelf: PropTypes.func.isRequired,
+    foundBooks: PropTypes.array
+  }
+
   state = {
     query: ''
   }
 
-  updateQuery = (query) => {
-      this.props.searchBooks(query)
-      this.setState({ query: query })
+  updateQuery = (event) => {
+    const query = event.target.value.trim()
+    this.setState({ query })
+    this.props.searchBooks(query)
   }
 
   render() {
@@ -23,7 +31,7 @@ class SearchPage extends Component {
             <input autoFocus
               type="text"
               value={this.state.query}
-              onChange={(event) => this.updateQuery(event.target.value)}
+              onChange={this.updateQuery}
               placeholder="Search by title or author"
             />
           </div>

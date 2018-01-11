@@ -16,12 +16,11 @@ class BooksApp extends Component {
     })
   }
 
-  updateShelf = (book, value) => {
-    BooksAPI.update(book, value).then(shelves => {
-      BooksAPI.getAll().then(updateBooks => {
-        this.setState({
-          books: updateBooks
-        })
+  updateShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      BooksAPI.getAll().then(books => {
+        this.setState({ books })
+        this.matchBook()
       })
     })
   }
@@ -31,12 +30,27 @@ class BooksApp extends Component {
   }
 
   searchBooks = (query) => {
-    BooksAPI.search(query).then((books) => {
-      if(books) {
-        !books.error ?
-          this.setState({ foundBooks : books }) :
-          this.setState({ foundBooks : [] })
-      }
+    query ? (
+      BooksAPI.search(query, 20).then(books => {
+        if(!books.error)  {
+          this.setState({ foundBooks: books })
+          this.matchBook()
+         } else {
+           this.setState({ foundBooks: [] })
+         }})
+    ) : (this.setState({ foundBooks: [] }))
+  }
+
+  matchBook() {
+    const { foundBooks, books } = this.state
+    this.setState({
+      foundBooks: foundBooks.map(book => {
+        book.shelf = 'none'
+        books.forEach(myBook => {
+          myBook.id === book.id && (book.shelf = myBook.shelf)
+        })
+        return book
+      })
     })
   }
 
@@ -52,8 +66,8 @@ class BooksApp extends Component {
         <Route path='/search' render={() => (
           <SearchPage
             searchBooks={this.searchBooks.bind(this)}
-            foundBooks={this.state.foundBooks}
             updateShelf={this.updateShelf.bind(this)}
+            foundBooks={this.state.foundBooks}
           />
         )}/>
       </div>
