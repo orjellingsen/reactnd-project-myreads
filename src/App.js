@@ -47,8 +47,9 @@ class BooksApp extends Component {
     ) : (this.setState({ foundBooks: [] }))
   }
 
-  // Map through each book in search results and see if they already exist in
-  // your collection. If they do, set the correct shelf.
+  /* Map through each book in search results and see if they already exist in
+     your collection. If they do, set the correct shelf.
+     I had help from the react slack community to implement this function */
   matchBook() {
     const { foundBooks, books } = this.state
     this.setState({
