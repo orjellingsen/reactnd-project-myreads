@@ -10,12 +10,15 @@ class BooksApp extends Component {
     foundBooks: []
   }
 
+  // Get all books from database when app start
   componentDidMount() {
     BooksAPI.getAll().then( (books) => {
       this.setState({ books })
     })
   }
 
+  // Updates the shelf on selected book, get an updated list of books
+  // Set correct shelf on books that are listed through search
   updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
       BooksAPI.getAll().then(books => {
@@ -25,13 +28,16 @@ class BooksApp extends Component {
     })
   }
 
+  // This function will filter books into the correct shelf
   filterBooks = (shelf) => {
     return this.state.books.filter((book) => book.shelf === shelf);
   }
 
+  // Search for books matching the query
   searchBooks = (query) => {
     query ? (
       BooksAPI.search(query, 20).then(books => {
+        // If results are returned, show books and set correct shelf
         if(!books.error)  {
           this.setState({ foundBooks: books })
           this.matchBook()
@@ -41,6 +47,8 @@ class BooksApp extends Component {
     ) : (this.setState({ foundBooks: [] }))
   }
 
+  // Map through each book in search results and see if they already exist in
+  // your collection. If they do, set the correct shelf.
   matchBook() {
     const { foundBooks, books } = this.state
     this.setState({

@@ -8,6 +8,7 @@ class Book extends Component {
     updateShelf: PropTypes.func.isRequired
   }
 
+  // This function handle any updates to shelf value
   handleChange = (e) => {
     this.props.updateShelf(this.props.book, e.target.value)
   }

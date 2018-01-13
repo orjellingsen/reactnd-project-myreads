@@ -9,6 +9,8 @@ class ListBooks extends Component {
     filterBooks: PropTypes.func.isRequired
   }
 
+  // Titles and shelf id will be looped through and passed
+  // into the BookShelf component
   shelves = [
     {id: 'currentlyReading', title: 'Currently Reading'},
     {id: 'wantToRead', title: 'Want to Read'},

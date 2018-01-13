@@ -14,6 +14,8 @@ class SearchPage extends Component {
     query: ''
   }
 
+  // This will run everytime the search input field is updated.
+  // Sets the state of query, and return search results
   updateQuery = (event) => {
     const query = event.target.value.trim()
     this.setState({ query })
